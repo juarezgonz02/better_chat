@@ -4,7 +4,12 @@ var miInit = { method: 'GET',
                headers: misCabeceras,
                mode: 'no-cors',
                cache: 'default' };
-
+try{
+    var message = chat[tamano].dataset.messageText;
+}
+catch(e){
+    console.log("SE HA DETENIDO LA LECTURA DEL CHAT");
+}
 function leerChat (){
     console.log("leyendoChat")
     var chat = document.getElementsByClassName("oIy2qc");
@@ -31,12 +36,12 @@ function continuar(){
     leerChat();
 }
 function control(){
-    fetch('http://localhost:5000/pause',miInit)
+    fetch('http://localhost:5000/control',miInit)
         .then(function(response) {
           return response.json();
         })
         .then(function(myJson) {
-          console.log(myJson.response);
+          console.log(myJson[0]);
         })
     
 }

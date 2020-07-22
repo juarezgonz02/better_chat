@@ -1,0 +1,20 @@
+{
+
+    "manifest_version": 2,
+    "name": "chat_client",
+    "version": "1.0",
+   
+    "description": "Control multimedia para windows",
+  
+    "icons": {
+      "48": "icons/border-48.png"
+    },
+  
+    "content_scripts": [
+      {
+        "matches": ["*://meet.google.com/*"],
+        "js": ["chat_client.js"]
+      }
+    ]
+  
+  }
