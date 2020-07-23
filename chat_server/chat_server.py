@@ -11,6 +11,7 @@ CORS(app)
 class Pausar(Resource):
     def get(self):
         controlR.push_button()
+        print("CONTROL DE REPRODUCCION DETECTADO")
         return { 'response': "Se ha detenido"}
 
 api.add_resource(Pausar, '/control')  # Route_1

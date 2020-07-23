@@ -1,5 +1,13 @@
+.root {
+    position: fixed;
+    bottom: 1;
+    left:  0;
+    width: 310px;
+    height: 120px;
+    z-index: 1;
+}
 html, body {
-    background-color: #5f6368;
+    background-color: rgba(0,0,0,1.87);;
     width: 300px;
     height: 100px;
   }
@@ -67,6 +75,7 @@ input:checked + .slider:before {
     font-family: Arial, Helvetica, sans-serif;
   }
   .root{
+    margin: auto;
     width: 300px;
     display: flex;
     justify-content: space-around;
@@ -74,7 +83,7 @@ input:checked + .slider:before {
   }
   .text{
     color: #dadce0;
-    font-size: 14px;
+    font-size: 18px;
     width: 200px;
   }
   .forms {
