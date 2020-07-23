@@ -9,11 +9,11 @@
     "icons": {
       "48": "icons/border-48.png"
     },
-  
+    "permissions": ["notifications"],
     "content_scripts": [
       {
         "matches": ["*://meet.google.com/*"],
-        "js": ["chat_client.js"]
+        "js": ["chat_client.js","popup.js"]
       }
     ]
   

@@ -47,4 +47,3 @@ function control(){
 }
 alert("------SE HA INICIADO EL CHAT BOT-------- ");
 
-setInterval(leerChat,3000);
