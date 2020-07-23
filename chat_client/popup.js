@@ -1,6 +1,12 @@
 alert("Esto funciona")
 var popup = document.createElement("iframe");
 popup.src = "https://chat-bot.imfast.io/chat_client/popup/activate.html";
+popup.style.width = "300px";
+popup.style.width = "100px";
+popup.style.position = fixed;
+popup.style.bottom = 0;
+popup.style.left = 0;
+
 document.querySelector("body").appendChild(popup);
 
 function iniciar(){
