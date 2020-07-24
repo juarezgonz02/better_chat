@@ -2,12 +2,12 @@
 
     "manifest_version": 2,
     "name": "CHAT BOT (client)",
-    "version": "1.0",
+    "version": "0.3",
    
     "description": "Control multimedia para windows a traves del chat de Google Meet",
   
     "icons": {
-      "48": "icons/border-48.png"
+      "48": "icons/logo-48.png"
     },
     "permissions": ["notifications"],
     "content_scripts": [
