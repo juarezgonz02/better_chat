@@ -2,20 +2,28 @@
 
     "manifest_version": 2,
     "name": "CHAT BOT (client)",
-    "version": "0.5",
+    "version": "alpha 1.0",
    
     "description": "Control multimedia para windows a traves del chat de Google Meet",
   
     "icons": {
-      "48": "icons/border-48.png"
+      "48": "icons/logo-48.png"
     },
-    "permissions": ["notifications"],
+    "permissions": ["storage"],
     "content_scripts": [
       {
         "matches": ["*://meet.google.com/*"],
         "js": ["popup.js","chat_client.js"],
         "css": ["popup/popup.css"]
       }
-    ]
-  
+    ],
+    "options_ui":{
+      "browser_style":true,
+      "page":"options/options.html"
+    },
+    "browser_specific_settings":{
+      "gecko":{
+        "id":"chatbot@addon.net"
+      }
+    }    
   }

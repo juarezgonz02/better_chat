@@ -1,40 +1,80 @@
-var permitir = true;
-var misCabeceras = new Headers();
-crearCheck();
-const popup = document.querySelector("input[name=checkbox]");
-var miInit = { method: 'GET',
+
+var permitir = false,popup;
+var close_b
+var parameters = new Object()
+const misCabeceras = new Headers();
+const miInit = { method: 'GET',
                headers: misCabeceras,
                mode: 'no-cors',
                cache: 'default' };
 
-try{
-    popup.addEventListener('change', checking)
-    console.log(popup);
-}
-catch(e){
-    console.log(e);
-    console.log("No se ha detectado mensaje");
+///////////////////////////////////////////////////////////////////////
+browser.storage.sync.get()
+    .then(
+        function(item){
+            parameters.default = item.default
+            parameters.control = item.control
+            parameters.vol_up = item.vol_up
+            parameters.vol_down = item.vol_down
+        },
+        function(e){
+            console.log(e)
+        }
+    ).then(
+        function(){
+            crearCheck(parameters.default)  
+            detectarChat()
+            
+        }
+    )
+    .then(
+        function(){
+            console.log(parameters)
+            permitir = parameters.default;
+            popup.addEventListener("change",checking)
+        }
+    )
+///////////////////////////////////////////////////////////////////////
+function detectarChat(){
+    chat = document.querySelector("div[jsname=xySENc]")
+    if((String(chat) == "null") ){
+        console.log("Abre el chat plissss")     
+        setTimeout(detectarChat,2000);
+    }
+    else{
+        console.log("Se ha detectado el chat")
+        chat.addEventListener("DOMNodeInserted",leerChat)
+
+        close_b = document.querySelector("div[class=VUk8eb]")
+        close_b.addEventListener("click",function(){
+            setTimeout(detectarChat,700);
+        })
+    }
 }
 
 function checking(event){
-    const status = event.target.checked;
-    if(status){
-        continuar();
-    }
-    else{
-        detener();
-    }
+    permitir = event.target.checked
+    console.log("permitir")
+
 }
 
 function leerChat (){
-    console.log("Leyendo...")
-    var chat = document.getElementsByClassName("oIy2qc");
-    var tamano = chat.length-1;
-    var message = chat[tamano].dataset.messageText;
-    var ultimoMessage = message.toLowerCase();
-    if(permitir){
-        if(ultimoMessage == "pausar"||ultimoMessage == "pausa"||ultimoMessage == "avanza"|| ultimoMessage == "avanzar" ){
-            console.log("Ultimo mensaje:  "+ message);
+    const switched = document.querySelector("input[name=checkbox]");
+    const allow = switched.checked
+    console.log(allow)
+    const chat = document.getElementsByClassName("oIy2qc");
+    const tamano = chat.length-1;
+    const message = chat[tamano].dataset.messageText;
+    const ultimoMessage = message.toLowerCase();
+    if(allow){
+        console.log("Leyendo...")
+        if(
+        ultimoMessage == parameters.control ||
+        ultimoMessage == "#pausa"  ||
+        ultimoMessage == "#avanza" ||
+        ultimoMessage == "#avanzar" )
+        {
+            console.log("Ultimo mensaje:  "+ message);              
             control();
             chat[tamano].dataset.messageText = "";
         }
@@ -44,23 +84,31 @@ function leerChat (){
     }
 
 
-}function detener(){
+}
+
+function detener(){
     permitir = false;
+    const chat = document.getElementsByClassName("oIy2qc");
+    const tamano = chat.length-1;
+    chat[tamano].dataset.messageText = "";
     console.log("SE HA DETENIDO LA LECTURA DEL CHAT");
 
 }
-function continuar(){
-    permitir = true;
-    setInterval(leerChat,2000);
-}
+
 function control(){
-    fetch('http://localhost:5000/control',miInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(myJson) {
-      console.log(myJson[0]);
-    })
+    try {
+        fetch('http://localhost:5000/control',miInit)
+        .then(function(response) {
+        return response.json();
+        })
+        .then(function(myJson) {
+        console.log(myJson);
+        })
+    } catch (error) {
+        console.log("Por favor enciende el servidor de control")
+    }
+    
 }
+
 alert("------SE HA INICIADO EL CHAT BOT-------- ");
 
