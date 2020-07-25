@@ -1,4 +1,6 @@
-var permitir = true,popup;
+
+var permitir = false,popup;
+var close_b
 var parameters = new Object()
 const misCabeceras = new Headers();
 const miInit = { method: 'GET',
@@ -18,35 +20,53 @@ browser.storage.sync.get()
         function(e){
             console.log(e)
         }
+    ).then(
+        function(){
+            crearCheck(parameters.default)  
+            detectarChat()
+            
+        }
     )
     .then(
         function(){
             console.log(parameters)
-            crearCheck(parameters.default);  
-            popup = document.querySelector("input[name=checkbox]");
+            permitir = parameters.default;
             popup.addEventListener("change",checking)
         }
     )
 ///////////////////////////////////////////////////////////////////////
-
-function checking(event){
-    const status = event.target.checked;
-    if(status){
-        continuar();
-        
+function detectarChat(){
+    chat = document.querySelector("div[jsname=xySENc]")
+    if((String(chat) == "null") ){
+        console.log("Abre el chat plissss")     
+        setTimeout(detectarChat,2000);
     }
     else{
-        detener();
+        console.log("Se ha detectado el chat")
+        chat.addEventListener("DOMNodeInserted",leerChat)
+
+        close_b = document.querySelector("div[class=VUk8eb]")
+        close_b.addEventListener("click",function(){
+            setTimeout(detectarChat,700);
+        })
     }
 }
 
+function checking(event){
+    permitir = event.target.checked
+    console.log("permitir")
+
+}
+
 function leerChat (){
-    
+    const switched = document.querySelector("input[name=checkbox]");
+    const allow = switched.checked
+    console.log(allow)
     const chat = document.getElementsByClassName("oIy2qc");
     const tamano = chat.length-1;
     const message = chat[tamano].dataset.messageText;
     const ultimoMessage = message.toLowerCase();
-    if(permitir){
+    if(allow){
         console.log("Leyendo...")
         if(
         ultimoMessage == parameters.control ||
@@ -73,11 +93,6 @@ function detener(){
     chat[tamano].dataset.messageText = "";
     console.log("SE HA DETENIDO LA LECTURA DEL CHAT");
 
-}
-
-function continuar(){
-    permitir = true;
-    setInterval(leerChat,2000);
 }
 
 function control(){
