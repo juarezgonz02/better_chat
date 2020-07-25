@@ -1,0 +1,22 @@
+.button-g{
+    border: 0px;
+}
+.button-b{
+    background-color: #0996f8;
+    border: 0px;
+}
+body{
+    margin: 20px;
+}
+.panel-section-footer{
+    margin-top: 5px;
+}
+switch{
+    height: 25px;
+    width: 25px;
+    background-color: #0060df;
+
+}
+#switch1:checked {
+    background-color: #0060df;
+}

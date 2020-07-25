@@ -1,4 +1,4 @@
-function crearCheck(){
+function crearCheck(checked){
 var popup = document.createElement("div");
 var main  = document.createElement("div");
 var text  = document.createElement("div");
@@ -13,10 +13,11 @@ popup.id = "popup";
 main.className = "main";
 text.className = "text";
 forms.className = "forms";
-check.type = "checkbox"; 
 label.className = "switch"; 
+check.type = "checkbox"; 
 check.id = "isChecked"; 
-check.name   = "checkbox"; 
+check.name   = "checkbox";
+check.checked = checked; 
 span.className = "slider round";
 
 var textnode = document.createTextNode("Control de lectura de chat");    

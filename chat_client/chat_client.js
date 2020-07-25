@@ -1,18 +1,39 @@
-var permitir = true;
+var permitir = true,popup;
+var parameters = new Object()
 const misCabeceras = new Headers();
 const miInit = { method: 'GET',
                headers: misCabeceras,
                mode: 'no-cors',
                cache: 'default' };
 
-crearCheck();   
-const popup = document.querySelector("input[name=checkbox]");
-popup.addEventListener('change', checking);
+///////////////////////////////////////////////////////////////////////
+browser.storage.sync.get()
+    .then(
+        function(item){
+            parameters.default = item.default
+            parameters.control = item.control
+            parameters.vol_up = item.vol_up
+            parameters.vol_down = item.vol_down
+        },
+        function(e){
+            console.log(e)
+        }
+    )
+    .then(
+        function(){
+            console.log(parameters)
+            crearCheck(parameters.default);  
+            popup = document.querySelector("input[name=checkbox]");
+            popup.addEventListener("change",checking)
+        }
+    )
+///////////////////////////////////////////////////////////////////////
 
 function checking(event){
     const status = event.target.checked;
     if(status){
         continuar();
+        
     }
     else{
         detener();
@@ -20,6 +41,7 @@ function checking(event){
 }
 
 function leerChat (){
+    
     const chat = document.getElementsByClassName("oIy2qc");
     const tamano = chat.length-1;
     const message = chat[tamano].dataset.messageText;
@@ -27,7 +49,7 @@ function leerChat (){
     if(permitir){
         console.log("Leyendo...")
         if(
-        ultimoMessage == "#pausar" ||
+        ultimoMessage == parameters.control ||
         ultimoMessage == "#pausa"  ||
         ultimoMessage == "#avanza" ||
         ultimoMessage == "#avanzar" )
