@@ -1,4 +1,3 @@
-
 var permitir = false,popup;
 var close_b
 var parameters = new Object()
@@ -14,8 +13,8 @@ browser.storage.sync.get()
         function(item){
             parameters.default = item.default
             parameters.control = item.control
-            parameters.vol_up = item.vol_up
-            parameters.vol_down = item.vol_down
+            parameters.alert = item.vol_up
+            parameters.vol_down = [item.vol_down]
         },
         function(e){
             console.log(e)
@@ -77,7 +76,14 @@ function leerChat (){
             console.log("Ultimo mensaje:  "+ message);              
             control();
             chat[tamano].dataset.messageText = "";
+        }    
+        else if(ultimoMessage.includes(parameters.alert)){
+            console.log("SI SE LLEGO AQUI")
+            //var command_pos = ultimoMessage.indexOf(parameters.alert)+parameters.alert.length
+            var mess =  ultimoMessage.substring(parameters.alert.length)
+            notifi_host(mess);
         }
+        ///////////////*/
     }
     else{
         console.log("A la espera...");
@@ -85,7 +91,20 @@ function leerChat (){
 
 
 }
-
+function notifi_host(message){
+    var nombre = document.getElementsByClassName("YTbUzc");
+    console.log("SI SE LLEGO AQUI")
+    try{
+        browser.runtime.sendMessage({
+        "name": nombre[nombre.length-1].innerHTML,
+        "message": message
+    });
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+ 
 function detener(){
     permitir = false;
     const chat = document.getElementsByClassName("oIy2qc");

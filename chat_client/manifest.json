@@ -2,14 +2,14 @@
 
     "manifest_version": 2,
     "name": "CHAT BOT (client)",
-    "version": "alpha 1.0",
+    "version": "alpha 1.2",
    
     "description": "Control multimedia para windows a traves del chat de Google Meet",
   
     "icons": {
       "48": "icons/logo-48.png"
     },
-    "permissions": ["storage"],
+    "permissions": ["storage","notifications"],
     "content_scripts": [
       {
         "matches": ["*://meet.google.com/*"],
@@ -17,6 +17,9 @@
         "css": ["popup/popup.css"]
       }
     ],
+    "background": {
+      "scripts": ["background/background.js"]
+    },
     "options_ui":{
       "browser_style":true,
       "page":"options/options.html"
