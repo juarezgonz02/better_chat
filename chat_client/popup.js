@@ -1,41 +1,10 @@
-function crearCheck(checked){
-var popup = document.createElement("div");
-var main  = document.createElement("div");
-var text  = document.createElement("div");
-var forms  = document.createElement("div");
-var check  = document.createElement("input");
-var p = document.createElement("p");
-var span = document.createElement("span");
-var label = document.createElement("label");
-p.className = "title";
-popup.className = "root";               
-popup.id = "popup";
-main.className = "main";
-text.className = "text";
-forms.className = "forms";
-label.className = "switch"; 
-check.type = "checkbox"; 
-check.id = "isChecked"; 
-check.name   = "checkbox";
-check.checked = checked; 
-span.className = "slider round";
-
-var textnode = document.createTextNode("Control de lectura de chat");    
-p.appendChild(textnode); 
-text.appendChild(p); 
-
-label.appendChild(check);
-label.appendChild(span);
-forms.appendChild(label)
-/////////////////
-main.appendChild(text);
-main.appendChild(forms);
-
-popup.appendChild(main);
-
-document.body.appendChild(popup);
-}
-
+const langsAsker = browser.runtime.connect({name:"langsAsker"});
+var langs;
+langsAsker.onMessage.addListener(
+    function(txts){//Function
+        langs = txts;
+    }
+)
 class Feed{
     constructor(){
         this.main  =  document.createElement("div");
@@ -61,28 +30,48 @@ class Feed{
         this.loader.classList.add("waiting");
         this.loader.style.visibility= "visible"
         this.text_container.style.visibility= "visible"
-        /*this.main.addEventListener("animationend",()=>{
-            this.text.style.visibility = "visible";
-            this.main.classList.remove("loading")
-         
-        })*/
     }
     ocultar(){
         this.loader.classList.remove("waiting")
         this.text_container.classList.add("oculting");
         this.loader.classList.add("oculting");
-        
-
-        //this.loader.className = "alertLoaderFinish";
-        //this.text.style.visibility = "hidden ";
-        //this.alert.className = "alertFinish";
-        
+     
     }
 }
-try{
-  
-
-}
-catch(e){
-    console.log(e)
+function crearCheck(checked,checkText){
+    const popup = document.createElement("div");
+    const main  = document.createElement("div");
+    const text  = document.createElement("div");
+    const forms  = document.createElement("div");
+    const check  = document.createElement("input");
+    const p = document.createElement("p");
+    const span = document.createElement("span");
+    const label = document.createElement("label");
+    p.className = "title";
+    popup.className = "root";               
+    popup.id = "popup";
+    main.className = "main";
+    text.className = "text";
+    forms.className = "forms";
+    label.className = "switch"; 
+    check.type = "checkbox"; 
+    check.id = "isChecked"; 
+    check.name   = "checkbox";
+    check.checked = checked; 
+    span.className = "slider round";
+    
+    const textnode = document.createTextNode(checkText);    
+    p.appendChild(textnode); 
+    text.appendChild(p); 
+    
+    label.appendChild(check);
+    label.appendChild(span);
+    forms.appendChild(label)
+    /////////////////
+    main.appendChild(text);
+    main.appendChild(forms);
+    
+    popup.appendChild(main);
+    
+    document.body.appendChild(popup);
 }

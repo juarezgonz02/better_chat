@@ -12,20 +12,22 @@ Feedback.crearAviso("Loading...");
 browser.storage.sync.get()
     .then(
         function(item){
+            console.log(langs)
             parameters.default = item.default;
             parameters.control = item.control;
             parameters.notify = item.notify;
+            parameters.texts = langs.txts;
             //parameters.vol_down = [item.vol_down]
         },
         function(e){
             console.log(e)
-        }
-    ).then(
+        })
+    .then(
         ()=>{
-           
-            crearCheck(parameters.default);  
+            console.log(parameters.texts)
+            crearCheck(parameters.default,parameters.texts.checkText);  
             popup = document.querySelector("input[name=checkbox]");
-            Feedback.cambiar("SE HA INICIADO");
+            Feedback.cambiar(parameters.texts.started);
             detectarChat();
             
         }
@@ -41,22 +43,22 @@ function detectarChat(){
     allow = document.querySelector("input[name=checkbox]");
     if((String(chat) == "null") ){
         if(allow.checked==false){
-            Feedback.cambiar("A la espera...");   
+            Feedback.cambiar(parameters.texts.waiting);   
         }else{
-            Feedback.cambiar("ABRE EL CHAT");   
+            Feedback.cambiar(parameters.texts.noChat);   
         }
         setTimeout(detectarChat,2000);
     }
     else{
         if(allow.checked==false){
-            Feedback.cambiar("A la espera...");   
+            Feedback.cambiar(parameters.texts.waiting);   
         }else{
-            Feedback.cambiar("LEYENDO...");   
+            Feedback.cambiar(parameters.texts.reading);   
         }
         chat.addEventListener("DOMNodeInserted",leerChat);
         close_b = document.querySelector("div[class=VUk8eb]");
         close_b.addEventListener("click",function(){
-            Feedback.cambiar("ABRE EL CHAT");  
+            Feedback.cambiar(parameters.texts.noChat);  
             setTimeout(detectarChat,700);
         })
     }
@@ -65,7 +67,7 @@ function checking(event){
     permitir = event.target.checked;
     console.log("permitir");
     if(!permitir){  
-        Feedback.cambiar("A la espera...")
+        Feedback.cambiar(parameters.texts.waiting)
     }else{
         detectarChat();
     }
@@ -81,7 +83,7 @@ function leerChat (){
     const message = chat[tamano].dataset.messageText;
     const ultimoMessage = message.toLowerCase();
     if(allow){
-        Feedback.cambiar("LEYENDO...");  
+        Feedback.cambiar(parameters.texts.reading);  
         if(
         ultimoMessage == parameters.control ||
         ultimoMessage == "#pausa"  ||
