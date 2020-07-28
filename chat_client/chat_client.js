@@ -1,72 +1,98 @@
+///////////////////////////////////////////////////////////////////////     
 var close_b,popup,permitir = false;
 const Feedback = new Feed();
 const parameters = new Object();
 const misCabeceras = new Headers();
 const miInit = { method: 'GET',
                headers: misCabeceras,
-               mode: 'no-cors',
-               cache: 'default' };
-
+               mode: 'no-cors',         
+               cache: 'default' };      
 ///////////////////////////////////////////////////////////////////////
 Feedback.crearAviso("Loading...");
+///////////////////////////////////////////////////////////////////////             
 browser.storage.sync.get()
-    .then(
+    .then(      
         function(item){
-            console.log(langs)
+
+            console.log(item)
             parameters.default = item.default;
             parameters.control = item.control;
-            parameters.notify = item.notify;
+            parameters.notify = item.display_notify;
             parameters.texts = langs.txts;
             //parameters.vol_down = [item.vol_down]
+
         },
         function(e){
             console.log(e)
         })
     .then(
         ()=>{
-            console.log(parameters.texts)
-            crearCheck(parameters.default,parameters.texts.checkText);  
-            popup = document.querySelector("input[name=checkbox]");
+
             Feedback.cambiar(parameters.texts.started);
+            crearCheck(parameters.default,parameters.texts.checkText);
             detectarChat();
-            
+
+            popup = document.querySelector("input[name=checkbox]");
+           
         }
     )
     .then(
         ()=>{
+
             popup.addEventListener("change",checking);
+
         }
     )
 ///////////////////////////////////////////////////////////////////////
 function detectarChat(){
-    chat = document.querySelector("div[jsname=xySENc]");
-    allow = document.querySelector("input[name=checkbox]");
-    if((String(chat) == "null") ){
-        if(allow.checked==false){
-            Feedback.cambiar(parameters.texts.waiting);   
-        }else{
-            Feedback.cambiar(parameters.texts.noChat);   
+try{
+
+    let chat = document.querySelector("div[jsname=xySENc");
+    let allow = document.querySelector("input[name=checkbox]").checked;
+
+    if( String(chat) == "null"){
+
+        if(allow==false){
+            Feedback.cambiar(parameters.texts.waiting);
+        }
+        else{
+            Feedback.cambiar(parameters.texts.noChat);
         }
         setTimeout(detectarChat,2000);
+
     }
     else{
-        if(allow.checked==false){
-            Feedback.cambiar(parameters.texts.waiting);   
-        }else{
-            Feedback.cambiar(parameters.texts.reading);   
-        }
+        let chat = document.querySelector("div[jsname=xySENc");
         chat.addEventListener("DOMNodeInserted",leerChat);
         close_b = document.querySelector("div[class=VUk8eb]");
+        
         close_b.addEventListener("click",function(){
-            Feedback.cambiar(parameters.texts.noChat);  
+            Feedback.cambiar(parameters.texts.noChat);
             setTimeout(detectarChat,700);
         })
+
+        if(allow.checked==false){
+            Feedback.cambiar(parameters.texts.waiting);
+        }
+        else{
+            Feedback.cambiar(parameters.texts.reading);
+        }
+
+        close_b.addEventListener("click",function(){
+            Feedback.cambiar(parameters.texts.noChat);
+            setTimeout(detectarChat,700);
+        })
+
     }
+}catch(e){
+    console.log(e)
+}
 }
 function checking(event){
+    
     permitir = event.target.checked;
-    console.log("permitir");
-    if(!permitir){  
+    
+    if(!permitir){
         Feedback.cambiar(parameters.texts.waiting)
     }else{
         detectarChat();
@@ -74,42 +100,44 @@ function checking(event){
 
 }
 function leerChat (){
-    const switched = document.querySelector("input[name=checkbox]");
-    const allow = switched.checked;
-    checking();
-    console.log(allow);
-    const chat = document.getElementsByClassName("oIy2qc");
-    const tamano = chat.length-1;
-    const message = chat[tamano].dataset.messageText;
-    const ultimoMessage = message.toLowerCase();
+
+    let switched = document.querySelector("input[name=checkbox]");
+    let allow = switched.checked;
+    let chat = document.getElementsByClassName("oIy2qc");
+    let tamanio = chat.length-1;
+    let message = chat[tamanio].dataset.messageText;
+    let ultimoMessage = message.toLowerCase();
+
     if(allow){
-        Feedback.cambiar(parameters.texts.reading);  
-        if(
+        commandCheck(ultimoMessage);
+        Feedback.cambiar(parameters.texts.reading);
+    }    
+    else{
+        Feedback.cambiar(parameters.texts.waiting);
+    }
+
+}
+
+function commandCheck(ultimoMessage){
+    if(
         ultimoMessage == parameters.control ||
         ultimoMessage == "#pausa"  ||
         ultimoMessage == "#avanza" ||
         ultimoMessage == "#avanzar" )
         {
-            console.log("Ultimo mensaje:  "+ message);              
             control();
             chat[tamano].dataset.messageText = "";
-        }    
-        else if(ultimoMessage.includes(parameters.notify)){
-            console.log("SI SE LLEGO AQUI");
-            var menss =  ultimoMessage.substring(parameters.notify.length);
+        }
+    //////////////////////////////////////////////////////////////
+    else if(
+        ultimoMessage.includes(parameters.notify))
+        {
+            let mess =  ultimoMessage.substring(parameters.notify.length);
             notifi_host(mess);
         }
-        ///////////////*/
-    }
-    else{
-        console.log("A la espera...");
-    }
-
-
 }
 function notifi_host(message){
-    var nombre = document.getElementsByClassName("YTbUzc");
-    console.log("SI SE LLEGO AQUI");
+    let nombre = document.getElementsByClassName("YTbUzc");
     try{
         browser.runtime.sendMessage({
         "name": nombre[nombre.length-1].innerHTML,
@@ -132,7 +160,7 @@ function control(){
     } catch (error) {
         console.log("Por favor enciende el servidor de control");
     }
-    
+
 }
 
 
