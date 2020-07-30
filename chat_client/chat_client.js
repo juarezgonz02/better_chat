@@ -8,7 +8,7 @@ const miInit = { method: 'GET',
                mode: 'no-cors',         
                cache: 'default' };      
 ///////////////////////////////////////////////////////////////////////
-Feedback.crearAviso("Loading...");
+Feedback.crearAviso("Loading...",false);
 ///////////////////////////////////////////////////////////////////////             
 browser.storage.sync.get()
     .then(      
@@ -27,11 +27,11 @@ browser.storage.sync.get()
         })
     .then(
         ()=>{
-
+            Feedback.crearAviso("Loading...",parameters.default);
+            //Feedback.check.checked = parameters.default;
             Feedback.cambiar(parameters.texts.started);
-            crearCheck(parameters.default,parameters.texts.checkText);
+            //Checkbox.crearCheck(parameters.checked,parameters.texts.checkText);
             detectarChat();
-
             popup = document.querySelector("input[name=checkbox]");
            
         }
@@ -58,30 +58,27 @@ try{
         else{
             Feedback.cambiar(parameters.texts.noChat);
         }
-        setTimeout(detectarChat,2000);
+        setTimeout(detectarChat,700);
 
     }
     else{
+        Feedback.open();
         let chat = document.querySelector("div[jsname=xySENc");
         chat.addEventListener("DOMNodeInserted",leerChat);
         close_b = document.querySelector("div[class=VUk8eb]");
         
         close_b.addEventListener("click",function(){
             Feedback.cambiar(parameters.texts.noChat);
+            Feedback.close();
             setTimeout(detectarChat,700);
         })
 
-        if(allow.checked==false){
+        if(allow==false){
             Feedback.cambiar(parameters.texts.waiting);
         }
         else{
             Feedback.cambiar(parameters.texts.reading);
         }
-
-        close_b.addEventListener("click",function(){
-            Feedback.cambiar(parameters.texts.noChat);
-            setTimeout(detectarChat,700);
-        })
 
     }
 }catch(e){
@@ -93,8 +90,10 @@ function checking(event){
     permitir = event.target.checked;
     
     if(!permitir){
+        Feedback.off();
         Feedback.cambiar(parameters.texts.waiting)
     }else{
+        Feedback.on();
         detectarChat();
     }
 
@@ -109,7 +108,7 @@ function leerChat (){
     let ultimoMessage = message.toLowerCase();
 
     if(allow){
-        commandCheck(ultimoMessage);
+        commandChecker(ultimoMessage);
         Feedback.cambiar(parameters.texts.reading);
     }    
     else{
@@ -117,15 +116,14 @@ function leerChat (){
     }
 
 }
-
-function commandCheck(ultimoMessage){
+function commandChecker(ultimoMessage){
     if(
         ultimoMessage == parameters.control ||
         ultimoMessage == "#pausa"  ||
         ultimoMessage == "#avanza" ||
         ultimoMessage == "#avanzar" )
         {
-            control();
+            notifi_host("control","control_command")
             chat[tamano].dataset.messageText = "";
         }
     //////////////////////////////////////////////////////////////
@@ -133,15 +131,19 @@ function commandCheck(ultimoMessage){
         ultimoMessage.includes(parameters.notify))
         {
             let mess =  ultimoMessage.substring(parameters.notify.length);
-            notifi_host(mess);
+            notifi_host(mess,"notify_command");
         }
 }
-function notifi_host(message){
+function notifi_host(message,c_type){
     let nombre = document.getElementsByClassName("YTbUzc");
+
     try{
         browser.runtime.sendMessage({
-        "name": nombre[nombre.length-1].innerHTML,
-        "message": message
+        "type": c_type,
+        "command_info":{
+            "name": nombre[nombre.length-1].innerHTML,
+            "message": message
+        }
     });
     }
     catch(e){

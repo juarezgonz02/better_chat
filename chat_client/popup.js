@@ -5,73 +5,89 @@ langsAsker.onMessage.addListener(
         langs = txts;
     }
 )
+
 class Feed{
     constructor(){
         this.main  =  document.createElement("div");
         this.loader =  document.createElement("div");
         this.text_container = document.createElement("div");
         this.text  = document.createElement("p");
+
+
+        ///////////////////////7777
+        this.forms  = document.createElement("div");
+        this.check  = document.createElement("input");
+        this.span = document.createElement("span");
+        this.label = document.createElement("label");
     }
-    crearAviso(message){
+    addAtributes(){
+        this.forms.className = "forms";
+        this.label.className = "switch"; 
+        this.check.type = "checkbox"; 
+        this.check.id = "isChecked"; 
+        this.check.name   = "checkbox";
+        this.span.className = "slider round";
+        
+    }
+    crearCheck(){       
+        this.addAtributes();         
+        this.label.appendChild(this.check);
+        this.label.appendChild(this.span);
+
+        this.forms.appendChild(this.label);
+        
+    }
+    crearAviso(message,checked){          
+    try{       
+        this.crearCheck()
         this.text.innerText = message;
+        this.check.checked = checked;
+        
         this.text.className = "alertText";
         this.text_container.className = "alertContainer";
-        this.main.className = "alertMain";
-        this.loader.className = "alertLoader";
+        this.main.classList.add("alertMain");
+
+        this.loader.classList.add("alertLoader");
+        this.loader.classList.add(this.toogler(checked));
 
         this.text_container.appendChild(this.text);
         this.main.appendChild(this.text_container);
         this.main.appendChild(this.loader);  
+        this.main.appendChild(this.forms);
         document.body.appendChild(this.main);
+    }
+    catch(e){
+        console.log(e)
+    }
     }   
+    toogler(check){
+        if(check){
+            return "on"
+        }else{
+            return "off"
+        }
+    }
     cambiar(mess){
         this.text.innerText = mess;
-        this.loader.className = "alertLoader";
-        this.loader.classList.add("waiting");
-        this.loader.style.visibility= "visible"
-        this.text_container.style.visibility= "visible"
+        //this.loader.className = "alertLoader";
     }
-    ocultar(){
-        this.loader.classList.remove("waiting")
-        this.text_container.classList.add("oculting");
-        this.loader.classList.add("oculting");
-     
+    on(){
+        this.loader.classList.remove("off")
+        this.loader.classList.add("on")     
     }
-}
-function crearCheck(checked,checkText){
-    const popup = document.createElement("div");
-    const main  = document.createElement("div");
-    const text  = document.createElement("div");
-    const forms  = document.createElement("div");
-    const check  = document.createElement("input");
-    const p = document.createElement("p");
-    const span = document.createElement("span");
-    const label = document.createElement("label");
-    p.className = "title";
-    popup.className = "root";               
-    popup.id = "popup";
-    main.className = "main";
-    text.className = "text";
-    forms.className = "forms";
-    label.className = "switch"; 
-    check.type = "checkbox"; 
-    check.id = "isChecked"; 
-    check.name   = "checkbox";
-    check.checked = checked; 
-    span.className = "slider round";
-    
-    const textnode = document.createTextNode(checkText);    
-    p.appendChild(textnode); 
-    text.appendChild(p); 
-    
-    label.appendChild(check);
-    label.appendChild(span);
-    forms.appendChild(label)
-    /////////////////
-    main.appendChild(text);
-    main.appendChild(forms);
-    
-    popup.appendChild(main);
-    
-    document.body.appendChild(popup);
+    off(){
+        this.loader.classList.remove("on")
+        this.loader.classList.add("off")    
+    }
+    open(){
+        this.main.classList.add("opened");
+        this.main.style.animation = ""
+    }
+    close(){
+        this.main.classList.add("close_a")
+        this.main.classList.remove("opened");
+        this.main.addEventListener("animationend",()=>{
+            this.main.classList.remove("close_a")
+        })
+    }
 }

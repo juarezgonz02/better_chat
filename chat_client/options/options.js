@@ -35,10 +35,11 @@ function reset(){
 }
 
 function confirm(){
+    browser.storage.sync.clear();
     browser.storage.sync.set({
             control: control_input.value,
             display_notify: display_notify_input.value,
-            vol_down: vol_down_input.value,
+            //vol_down: vol_down_input.value,
             default: default_check.checked
         })
     actual_config()
@@ -51,7 +52,6 @@ function preferences(conf){
     }
 
     const onErr = (e) => {
-        //error
         console.log(e)
     }
 

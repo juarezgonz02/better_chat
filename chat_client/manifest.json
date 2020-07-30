@@ -9,7 +9,7 @@
     "icons": {
       "48": "icons/logo-48.png"
     },
-    "permissions": ["storage","notifications"],
+    "permissions": ["storage","notifications","nativeMessaging"],
     "content_scripts": [
       {
         "matches": ["*://meet.google.com/*"],
