@@ -5,8 +5,11 @@
     background-color: #0996f8;
     border: 0px;
 }
+.break{
+    margin-top: 10px;
+}
 body{
-    margin: 20px;
+    margin: 10px;
 }
 .panel-section-footer{
     margin-top: 5px;

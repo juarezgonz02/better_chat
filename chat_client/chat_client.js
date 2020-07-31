@@ -1,100 +1,155 @@
-
-var permitir = false,popup;
-var close_b
-var parameters = new Object()
+///////////////////////////////////////////////////////////////////////     
+var close_b,popup,permitir = false;
+const Feedback = new Feed();
+const parameters = new Object();
 const misCabeceras = new Headers();
 const miInit = { method: 'GET',
                headers: misCabeceras,
-               mode: 'no-cors',
-               cache: 'default' };
-
+               mode: 'no-cors',         
+               cache: 'default' };      
 ///////////////////////////////////////////////////////////////////////
+Feedback.crearAviso("Loading...",false);
+///////////////////////////////////////////////////////////////////////             
 browser.storage.sync.get()
-    .then(
+    .then(      
         function(item){
-            parameters.default = item.default
-            parameters.control = item.control
-            parameters.vol_up = item.vol_up
-            parameters.vol_down = item.vol_down
+
+            console.log(item)
+            parameters.default = item.default;
+            parameters.control = item.control;
+            parameters.notify = item.display_notify;
+            parameters.texts = langs.txts;
+            //parameters.vol_down = [item.vol_down]
+
         },
         function(e){
             console.log(e)
-        }
-    ).then(
-        function(){
-            crearCheck(parameters.default)  
-            detectarChat()
-            
+        })
+    .then(
+        ()=>{
+            Feedback.crearAviso("Loading...",parameters.default);
+            //Feedback.check.checked = parameters.default;
+            Feedback.cambiar(parameters.texts.started);
+            //Checkbox.crearCheck(parameters.checked,parameters.texts.checkText);
+            detectarChat();
+            popup = document.querySelector("input[name=checkbox]");
+           
         }
     )
     .then(
-        function(){
-            console.log(parameters)
-            permitir = parameters.default;
-            popup.addEventListener("change",checking)
+        ()=>{
+
+            popup.addEventListener("change",checking);
+
         }
     )
 ///////////////////////////////////////////////////////////////////////
 function detectarChat(){
-    chat = document.querySelector("div[jsname=xySENc]")
-    if((String(chat) == "null") ){
-        console.log("Abre el chat plissss")     
-        setTimeout(detectarChat,2000);
+try{
+
+    let chat = document.querySelector("div[jsname=xySENc");
+    let allow = document.querySelector("input[name=checkbox]").checked;
+
+    if( String(chat) == "null"){
+
+        if(allow==false){
+            Feedback.cambiar(parameters.texts.waiting);
+        }
+        else{
+            Feedback.cambiar(parameters.texts.noChat);
+        }
+        setTimeout(detectarChat,700);
+
     }
     else{
-        console.log("Se ha detectado el chat")
-        chat.addEventListener("DOMNodeInserted",leerChat)
-
-        close_b = document.querySelector("div[class=VUk8eb]")
+        Feedback.open();
+        let chat = document.querySelector("div[jsname=xySENc");
+        chat.addEventListener("DOMNodeInserted",leerChat);
+        close_b = document.querySelector("div[class=VUk8eb]");
+        
         close_b.addEventListener("click",function(){
+            Feedback.cambiar(parameters.texts.noChat);
+            Feedback.close();
             setTimeout(detectarChat,700);
         })
+
+        if(allow==false){
+            Feedback.cambiar(parameters.texts.waiting);
+        }
+        else{
+            Feedback.cambiar(parameters.texts.reading);
+        }
+
     }
+}catch(e){
+    console.log(e)
 }
-
+}
 function checking(event){
-    permitir = event.target.checked
-    console.log("permitir")
+    
+    permitir = event.target.checked;
+    
+    if(!permitir){
+        Feedback.off();
+        Feedback.cambiar(parameters.texts.waiting)
+    }else{
+        Feedback.on();
+        detectarChat();
+    }
 
 }
-
 function leerChat (){
-    const switched = document.querySelector("input[name=checkbox]");
-    const allow = switched.checked
-    console.log(allow)
-    const chat = document.getElementsByClassName("oIy2qc");
-    const tamano = chat.length-1;
-    const message = chat[tamano].dataset.messageText;
-    const ultimoMessage = message.toLowerCase();
+
+    let switched = document.querySelector("input[name=checkbox]");
+    let allow = switched.checked;
+    let chat = document.getElementsByClassName("oIy2qc");
+    let tamanio = chat.length-1;
+    let message = chat[tamanio].dataset.messageText;
+    let ultimoMessage = message.toLowerCase();
+
     if(allow){
-        console.log("Leyendo...")
-        if(
+        commandChecker(ultimoMessage);
+        Feedback.cambiar(parameters.texts.reading);
+    }    
+    else{
+        Feedback.cambiar(parameters.texts.waiting);
+    }
+
+}
+function commandChecker(ultimoMessage){
+    if(
         ultimoMessage == parameters.control ||
         ultimoMessage == "#pausa"  ||
         ultimoMessage == "#avanza" ||
         ultimoMessage == "#avanzar" )
         {
-            console.log("Ultimo mensaje:  "+ message);              
-            control();
+            notifi_host("control","control_command")
             chat[tamano].dataset.messageText = "";
         }
-    }
-    else{
-        console.log("A la espera...");
-    }
-
-
+    //////////////////////////////////////////////////////////////
+    else if(
+        ultimoMessage.includes(parameters.notify))
+        {
+            let mess =  ultimoMessage.substring(parameters.notify.length);
+            notifi_host(mess,"notify_command");
+        }
 }
+function notifi_host(message,c_type){
+    let nombre = document.getElementsByClassName("YTbUzc");
 
-function detener(){
-    permitir = false;
-    const chat = document.getElementsByClassName("oIy2qc");
-    const tamano = chat.length-1;
-    chat[tamano].dataset.messageText = "";
-    console.log("SE HA DETENIDO LA LECTURA DEL CHAT");
-
+    try{
+        browser.runtime.sendMessage({
+        "type": c_type,
+        "command_info":{
+            "name": nombre[nombre.length-1].innerHTML,
+            "message": message
+        }
+    });
+    }
+    catch(e){
+        console.log(e);
+    }
 }
-
 function control(){
     try {
         fetch('http://localhost:5000/control',miInit)
@@ -103,12 +158,12 @@ function control(){
         })
         .then(function(myJson) {
         console.log(myJson);
-        })
+        });
     } catch (error) {
-        console.log("Por favor enciende el servidor de control")
+        console.log("Por favor enciende el servidor de control");
     }
-    
+
 }
 
-alert("------SE HA INICIADO EL CHAT BOT-------- ");
+
 
