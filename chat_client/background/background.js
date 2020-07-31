@@ -1,4 +1,4 @@
-const port = browser.runtime.connectNative("chat_bot");
+const port = browser.runtime.connectNative("better_chat");
 const textos = txt()
 browser.runtime.onMessage.addListener(receiver);
 browser.runtime.onConnect.addListener(connected);
@@ -9,7 +9,7 @@ function responser(res){
     console.log("Received: " + res);
 }
 ////////////////////////////////////////////
-function connected(port){
+function connected(port){ 
   port.postMessage({
     txts:  textos
   })
