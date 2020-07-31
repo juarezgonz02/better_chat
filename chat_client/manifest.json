@@ -1,8 +1,8 @@
 {
 
     "manifest_version": 2,
-    "name": "CHAT BOT (client)",
-    "version": "2",
+    "name": "BETTER CHAT (client)",
+    "version": "Alpha 2",
    
     "description": "Control multimedia para windows a traves del chat de Google Meet",
   
