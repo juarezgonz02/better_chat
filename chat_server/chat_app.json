@@ -1,8 +1,0 @@
-{
-    "name": "chat_bot",
-    "description": "Example host for native messaging",
-    "path": "C:\\Users\\OSCAR\\Documents\\chat-bot\\chat_server\\chat_bot.bat",
-    "type": "stdio",
-    "allowed_extensions": [ "chatbot@addon.net" ]
-}
-  
