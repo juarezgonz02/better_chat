@@ -1,4 +1,4 @@
-# BETTER CHAT BOT
+# Better Chat for Google Meet
 > Beta 1 (no installer gui)
 
 This version has in "chat_client" a Firefox addOn that works on meet.google.com/xxxxx only

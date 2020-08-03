@@ -34,6 +34,13 @@ function receiver(res) {
   }
 }
 
+port.onDisconnect.addListener((e)=>{
+  browser.tabs.create({
+    url: "https://www.google.com"
+  })
+
+})
+
 /*
 On startup, connect to the "ping_pong" app.
 
