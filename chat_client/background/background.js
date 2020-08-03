@@ -36,7 +36,7 @@ function receiver(res) {
 
 port.onDisconnect.addListener((e)=>{
   browser.tabs.create({
-    url: "https://www.google.com"
+    url: "https://juarezgonz02.github.io/better_chat/"
   })
 
 })
