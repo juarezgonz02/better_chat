@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fac4e7f6c53383b022850b44e5a99c83",
+    "revision": "4531660d8d4a48c03a5ce47f43acd423",
     "url": "/better_chat/index.html"
   },
   {
-    "revision": "e70f5f83f00f3027e58d",
+    "revision": "51e9b2fc2e6270531ef4",
     "url": "/better_chat/static/css/main.07bad45a.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/better_chat/static/js/2.67d5e6cf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e70f5f83f00f3027e58d",
-    "url": "/better_chat/static/js/main.0d11eb4b.chunk.js"
+    "revision": "51e9b2fc2e6270531ef4",
+    "url": "/better_chat/static/js/main.16d9f865.chunk.js"
   },
   {
     "revision": "58303594f8c572f52a6d",
