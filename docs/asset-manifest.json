@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/better_chat/static/css/main.07bad45a.chunk.css",
-    "main.js": "/better_chat/static/js/main.16d9f865.chunk.js",
-    "main.js.map": "/better_chat/static/js/main.16d9f865.chunk.js.map",
+    "main.css": "/better_chat/static/css/main.cf9191a5.chunk.css",
+    "main.js": "/better_chat/static/js/main.fdd9083b.chunk.js",
+    "main.js.map": "/better_chat/static/js/main.fdd9083b.chunk.js.map",
     "runtime-main.js": "/better_chat/static/js/runtime-main.b5dcc647.js",
     "runtime-main.js.map": "/better_chat/static/js/runtime-main.b5dcc647.js.map",
     "static/js/2.67d5e6cf.chunk.js": "/better_chat/static/js/2.67d5e6cf.chunk.js",
     "static/js/2.67d5e6cf.chunk.js.map": "/better_chat/static/js/2.67d5e6cf.chunk.js.map",
     "index.html": "/better_chat/index.html",
-    "precache-manifest.c2d292e028ccb59a9800b4dfbf9da1fe.js": "/better_chat/precache-manifest.c2d292e028ccb59a9800b4dfbf9da1fe.js",
+    "precache-manifest.9a3c61ac0e996abd51e94c4c7f60cf46.js": "/better_chat/precache-manifest.9a3c61ac0e996abd51e94c4c7f60cf46.js",
     "service-worker.js": "/better_chat/service-worker.js",
-    "static/css/main.07bad45a.chunk.css.map": "/better_chat/static/css/main.07bad45a.chunk.css.map",
+    "static/css/main.cf9191a5.chunk.css.map": "/better_chat/static/css/main.cf9191a5.chunk.css.map",
     "static/js/2.67d5e6cf.chunk.js.LICENSE.txt": "/better_chat/static/js/2.67d5e6cf.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b5dcc647.js",
     "static/js/2.67d5e6cf.chunk.js",
-    "static/css/main.07bad45a.chunk.css",
-    "static/js/main.16d9f865.chunk.js"
+    "static/css/main.cf9191a5.chunk.css",
+    "static/js/main.fdd9083b.chunk.js"
   ]
 }

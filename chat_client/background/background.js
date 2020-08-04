@@ -22,7 +22,7 @@ function receiver(res) {
     case "notify_command":
       browser.notifications.create({
         "type": "basic",
-        "iconUrl": browser.extension.getURL("icons/logo-48.png"),
+        "iconUrl": browser.extension.getURL("icons/logo-96.png"),
         "title": "Tienes un nuevo mensaje de: " + res.command_info.name,
         "message": res.command_info.message
       });
@@ -36,17 +36,8 @@ function receiver(res) {
 
 port.onDisconnect.addListener((e)=>{
   browser.tabs.create({
-    url: "https://juarezgonz02.github.io/better_chat/"
+    url: "https://juarezgonz02.github.io/better_chat/?no_app=noAppInstalled"
   })
 
 })
 
-/*
-On startup, connect to the "ping_pong" app.
-
-browser.browserAction.onClicked.addListener(() => {
-  console.log("Sending:  control");
-  port.postMessage("control");
-});
-
-*/
