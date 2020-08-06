@@ -13,8 +13,15 @@ Adds a Better Chat for Desktop.exe which is called from meet.google.com by a #co
 ## Español:
 * Se agregó una pagina de inicio en https://juarezgonz02.github.io/better_chat/ 
 
-* Se añadio Gui al instalador y se creó la primera version completamente funcional (Se puede encontrar en la seccion release del repo )
+* Se añadio GUI al instalador y se creó la primera version completamente funcional (Se puede encontrar en la seccion release del repo )
+
+* Eventos de instalación y desinstalación del AddOn, cambios internos del 'browser.storage'
+
+* Cambios esteticos en instalador
 
 ## English:
 * Home page added at https://juarezgonz02.github.io/better_chat/
+
 * Now the installer has GUI, and the first release was completely upload and working (You can find at release Section) 
+
+* added OnInstall and OnUninstall events in AddOn, changed 'browser.storage' values
