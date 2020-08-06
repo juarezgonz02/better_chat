@@ -1,5 +1,5 @@
 # Better Chat for Google Meet
-> REALEASE 1.2.1
+> RELEASE 1.2.1
 
 This version has in "chat_client" a Firefox addOn that works on meet.google.com/xxxxx only
     It needs Meet Chat opened to work
