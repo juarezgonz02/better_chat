@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/better_chat/static/css/main.cf9191a5.chunk.css",
-    "main.js": "/better_chat/static/js/main.fdd9083b.chunk.js",
-    "main.js.map": "/better_chat/static/js/main.fdd9083b.chunk.js.map",
+    "main.js": "/better_chat/static/js/main.6f1796c3.chunk.js",
+    "main.js.map": "/better_chat/static/js/main.6f1796c3.chunk.js.map",
     "runtime-main.js": "/better_chat/static/js/runtime-main.b5dcc647.js",
     "runtime-main.js.map": "/better_chat/static/js/runtime-main.b5dcc647.js.map",
     "static/js/2.67d5e6cf.chunk.js": "/better_chat/static/js/2.67d5e6cf.chunk.js",
     "static/js/2.67d5e6cf.chunk.js.map": "/better_chat/static/js/2.67d5e6cf.chunk.js.map",
     "index.html": "/better_chat/index.html",
-    "precache-manifest.9a3c61ac0e996abd51e94c4c7f60cf46.js": "/better_chat/precache-manifest.9a3c61ac0e996abd51e94c4c7f60cf46.js",
+    "precache-manifest.df2e3989d16e05718c4586ca5cbe1438.js": "/better_chat/precache-manifest.df2e3989d16e05718c4586ca5cbe1438.js",
     "service-worker.js": "/better_chat/service-worker.js",
     "static/css/main.cf9191a5.chunk.css.map": "/better_chat/static/css/main.cf9191a5.chunk.css.map",
     "static/js/2.67d5e6cf.chunk.js.LICENSE.txt": "/better_chat/static/js/2.67d5e6cf.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b5dcc647.js",
     "static/js/2.67d5e6cf.chunk.js",
     "static/css/main.cf9191a5.chunk.css",
-    "static/js/main.fdd9083b.chunk.js"
+    "static/js/main.6f1796c3.chunk.js"
   ]
 }

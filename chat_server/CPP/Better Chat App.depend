@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1596686923 source:c:\users\oscar\desktop\lib\better chta\better chat exr\main.cpp
+	<string>
+	<json.hpp>
+	<windows.h>
+	<iostream>
+	<unistd.h>
+
+1596686984 source:c:\users\oscar\documents\native-messaging\app\cpp\icon.rc
+
