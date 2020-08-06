@@ -2,7 +2,7 @@
 
     "manifest_version": 2,
     "name": "Better Chat for Meet",
-    "version": "2.5.2",
+    "version": "2.6.0",
    
     "description": "Control multimedia para windows a traves del chat de Google Meet",
   
@@ -20,7 +20,7 @@
       }
     ],
     "background": {
-      "scripts": ["background/lang/langs.js","background/background.js"]
+      "scripts": ["background/lang/langs.js","background/background.js","background/onInstallUninstall.js"]
     },
     "options_ui":{
       "browser_style":true,

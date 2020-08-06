@@ -6,7 +6,7 @@ DisableWelcomePage=False
 DisableReadyMemo=True
 AppName=Better Chat for Desktop Installer
 AppVersion=1.2.1
-LicenseFile=C:\Users\OSCAR\Desktop\lib\LICENCE.txt
+LicenseFile=userdocs:chat-bot\LICENCE
 RestartIfNeededByRun=False
 SetupIconFile=C:\Users\OSCAR\Downloads\logo_ico.ico
 AllowRootDirectory=True
@@ -22,8 +22,8 @@ VersionInfoProductName=Better Chat for Desktop Installer
 VersionInfoProductVersion=1.2.1
 VersionInfoOriginalFileName=better_chat
 WizardStyle=modern
-WizardSmallImageFile=C:\Users\OSCAR\Desktop\lib\Normal_ico.bmp
-WizardImageFile=C:\Users\OSCAR\Desktop\lib\installer_big_2.bmp
+WizardSmallImageFile=userdocs:chat-bot\chat_server\RESOURCES\Ico_installer.bmp
+WizardImageFile=userdocs:chat-bot\chat_server\RESOURCES\Banner_installer_renewed.bmp
 UsePreviousGroup=False
 LanguageDetectionMethod=locale
 DisableReadyPage=True
@@ -34,7 +34,7 @@ WizardImageStretch=False
 AppSupportURL=https://juarezgonz02.github.io/better_chat/
 AppUpdatesURL=https://juarezgonz02.github.io/better_chat/
 AppContact=juarezgonz02@gmail.com
-WizardSizePercent=120,120
+WizardSizePercent=118,118
 
 [Icons]
 Name: "{app}\icon"; Filename: "{app}\ico.ico"; IconFilename: "{app}\ico.ico"; IconIndex: 0
@@ -54,3 +54,4 @@ Source: "C:\Users\OSCAR\Downloads\open-sans (2)\OpenSans-Regular.ttf"; DestDir: 
 Source: "C:\Users\OSCAR\Downloads\roboto (1)\Roboto-Regular.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "Roboto"
 Source: "Better Chat for Desktop.exe"; DestDir: "{app}"; DestName: "Better Chat for Desktop.exe"
 Source: "better_chat.json"; DestDir: "{app}"; DestName: "better_chat.json"
+Source: "logo_ico.ico"; DestDir: "{app}"; DestName: "Icon.ico"
